@@ -6,10 +6,10 @@ public class DataConvert {
 
     @SuppressLint("DefaultLocale")
     public static String byteToHexString(byte[] b) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
 
-        for (int i = 0; i < b.length; i++) {
-            String hex = Integer.toHexString(b[i] & 0xFF);
+        for (byte aB : b) {
+            String hex = Integer.toHexString(aB & 0xFF);
             if (hex.length() == 1) {
                 hex = '0' + hex;
             }
