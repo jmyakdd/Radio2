@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -56,6 +57,7 @@
                 android:textColor="@color/black"
                 android:textSize="30sp" />
         </LinearLayout>
+
     </RelativeLayout>
 
     <LinearLayout

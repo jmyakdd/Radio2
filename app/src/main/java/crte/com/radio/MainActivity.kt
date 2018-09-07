@@ -2,6 +2,7 @@ package crte.com.radio
 
 import android.os.Bundle
 import crte.com.radio.activity.BaseActivity
+import crte.com.radio.activity.ContactActivity
 import crte.com.radio.api.ApiServiceHelper
 import crte.com.radio.api.BaseListResponseResult
 import crte.com.radio.entry.Contact
@@ -21,6 +22,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        menu.setOnClickListener {
+            jump(ContactActivity::class.java)
+        }
         contact.setOnClickListener {
             //            jump(ContactActivity::class.java)
             ApiServiceHelper.getInstance().apiService.getUserList()
