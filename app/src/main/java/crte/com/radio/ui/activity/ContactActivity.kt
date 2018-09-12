@@ -1,137 +1,68 @@
 package crte.com.radio.ui.activity
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.Toast
 import com.jmy.mycustomerviewlibrary.inf.RefreshLoadListener
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter
 import crte.com.radio.R
 import crte.com.radio.adapter.ContactAdapter
-import crte.com.radio.entry.Contact
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_contact.*
+import crte.com.radio.databinding.ActivityContactBinding
+import crte.com.radio.util.ToastUtil
+import crte.com.radio.viewModel.ContactViewModel
 
-class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
-    override fun upLoad() {
-        Observable.create(object : ObservableOnSubscribe<String> {
-
-            override fun subscribe(emitter: ObservableEmitter<String>) {
-                Thread.sleep(2000)
-                emitter.onNext("sss")
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<String> {
-
-                    override fun onComplete() {
-
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onNext(t: String) {
-                        getData()
-                        my_recyclerview.notifyDataSetChanged()
-                        my_recyclerview.stopRefresh(page, false)
-                        page++
-                    }
-
-
-                    override fun onError(e: Throwable) {
-
-                    }
-                })
-    }
-
-    override fun downRefresh() {
-        Observable.create(object : ObservableOnSubscribe<String> {
-
-            override fun subscribe(emitter: ObservableEmitter<String>) {
-                Thread.sleep(2000)
-                emitter.onNext("sss")
-            }
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<String> {
-
-                    override fun onComplete() {
-
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onNext(t: String) {
-                        page = 1
-                        data.clear()
-                        getData()
-                        /*if (count % 2 != 0)
-                            getData()
-                        count++*/
-                        my_recyclerview.notifyDataSetChanged()
-                        if (data.size == 0) {
-                            my_recyclerview.stopRefresh(page, true)
-                        } else {
-                            my_recyclerview.stopRefresh(page, false)
-                        }
-                        page++
-                    }
-
-
-                    override fun onError(e: Throwable) {
-
-                    }
-                })
-    }
-
-    var data = mutableListOf<Contact>()
-    var page = 1
+class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewModel.ViewCallBack {
+    lateinit var binding: ActivityContactBinding
+    lateinit var viewModel: ContactViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact)
+        log(System.currentTimeMillis().toString())
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_contact)
         setBack()
         setTitle("通讯录")
-        var adapter = ContactAdapter(this, data)
+        viewModel = ContactViewModel(this, this)
+        var adapter = ContactAdapter(this, viewModel.datas.get()!!)
+//        binding.viewModel = viewModel
+        binding.myRecyclerview.setAdapter(adapter)
+        binding.myRecyclerview.setLayoutManager(LinearLayoutManager(this))
+        binding.myRecyclerview.setLoadListener(this)
 
-        my_recyclerview.setAdapter(adapter)
-        my_recyclerview.setLayoutManager(LinearLayoutManager(this))
-        my_recyclerview.setLoadListener(this)
-
-        /*rv_contact.adapter = adapter
-        rv_contact.layoutManager = LinearLayoutManager(this)*/
         adapter.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {
                 return true
             }
 
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
-                Toast.makeText(this@ContactActivity, data.get(position).name, Toast.LENGTH_SHORT).show()
+                ToastUtil.showShort(viewModel.datas.get()!!.get(position).name)
             }
         })
+
+        log(System.currentTimeMillis().toString())
     }
 
     override fun onResume() {
         super.onResume()
-        my_recyclerview.startRefresh()
+        binding.myRecyclerview.startRefresh()
+        log(System.currentTimeMillis().toString())
     }
 
-    fun getData() {
-        for (i in 0..20) {
-            var d = Contact()
-            d.id = i
-            d.name = "name${i}"
-            data.add(d)
-        }
+    override fun completeRefresh() {
+        binding.myRecyclerview.notifyDataSetChanged()
+        binding.myRecyclerview.stopRefresh()
+    }
+
+    override fun completeLoad() {
+        binding.myRecyclerview.notifyDataSetChanged()
+        binding.myRecyclerview.stopLoad()
+    }
+
+    override fun upLoad() {
+        viewModel.startLoad()
+    }
+
+    override fun downRefresh() {
+        viewModel.startRefresh()
     }
 }

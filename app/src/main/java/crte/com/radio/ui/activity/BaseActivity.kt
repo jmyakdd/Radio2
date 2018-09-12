@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.Toast
 import crte.com.radio.api.ApiService
 import crte.com.radio.api.ApiServiceHelper
 import crte.com.radio.entry.Contact
 import crte.com.radio.entry.StatusMessageEvent
+import crte.com.radio.util.ToastUtil
 import kotlinx.android.synthetic.main.status_bar.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -33,7 +33,7 @@ abstract class BaseActivity : AppCompatActivity() {
             -1 -> {
                 var contact: Contact = msgEvent.obj as Contact
                 log(msgEvent.message!! + contact.name)
-                showToast(msgEvent.message!! + contact.name)
+                ToastUtil.showShort(msgEvent.message!! + contact.name)
             }
         }
     }
@@ -53,10 +53,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun jump(clazz: Class<*>) {
         startActivity(Intent(this, clazz))
-    }
-
-    fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun log(msg: String) {
