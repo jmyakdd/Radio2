@@ -1,4 +1,4 @@
-package crte.com.radio.activity
+package crte.com.radio.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,7 +10,6 @@ import com.zhy.adapter.recyclerview.MultiItemTypeAdapter
 import crte.com.radio.R
 import crte.com.radio.adapter.ContactAdapter
 import crte.com.radio.entry.Contact
-import crte.com.radio.entry.StatusMessageEvent
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -19,8 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_contact.*
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
     override fun upLoad() {
@@ -45,6 +42,8 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
                     override fun onNext(t: String) {
                         getData()
                         my_recyclerview.notifyDataSetChanged()
+                        my_recyclerview.stopRefresh(page, false)
+                        page++
                     }
 
 
@@ -74,16 +73,19 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
                     }
 
                     override fun onNext(t: String) {
+                        page = 1
                         data.clear()
-                        if (count % 2 != 0)
+                        getData()
+                        /*if (count % 2 != 0)
                             getData()
-                        count++
+                        count++*/
                         my_recyclerview.notifyDataSetChanged()
                         if (data.size == 0) {
-                            my_recyclerview.stopRefresh(0, true)
+                            my_recyclerview.stopRefresh(page, true)
                         } else {
-                            my_recyclerview.stopRefresh(1, true)
+                            my_recyclerview.stopRefresh(page, false)
                         }
+                        page++
                     }
 
 
@@ -93,8 +95,8 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
                 })
     }
 
-    var count = 0
     var data = mutableListOf<Contact>()
+    var page = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
@@ -130,17 +132,6 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener {
             d.id = i
             d.name = "name${i}"
             data.add(d)
-        }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onReceiveMessage(msgEvent: StatusMessageEvent) {
-        when (msgEvent.code) {
-            -1 -> {
-                var contact: Contact = msgEvent.obj as Contact
-                log(msgEvent.message!! + contact.name)
-                showToast(msgEvent.message!! + contact.name)
-            }
         }
     }
 }

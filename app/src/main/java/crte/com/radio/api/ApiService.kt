@@ -8,7 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @POST("accuont/login")
+    @POST("accuont/loginSuccess")
     fun login(@Query("name") name: String, @Query("password") password: String): Observable<BaseResponseResult<Contact>>
 
     @GET("getUserList")

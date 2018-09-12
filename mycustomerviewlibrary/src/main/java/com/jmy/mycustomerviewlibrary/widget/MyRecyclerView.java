@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -57,6 +58,8 @@ public class MyRecyclerView extends LinearLayout implements SwipeRefreshLayout.O
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 int totalCount = layoutManager.getItemCount() - 1;
+                Log.e("test",totalCount+" "+newState+" "+RecyclerView.SCROLL_STATE_IDLE+" "+
+                        lastVisibleItem+" "+isNoData+" "+isShowFooter);
                 if (totalCount > 18 && newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem == totalCount && !isNoData && !isShowFooter) {
                     if (null != loadListener) {
                         setFooter();
@@ -84,14 +87,13 @@ public class MyRecyclerView extends LinearLayout implements SwipeRefreshLayout.O
         meRefreshListAdapter.setNoData(isNoData);
         showData(meRefreshListAdapter.getItemCount() > 0);
         if (pageCount == 1) {
-//            refreshLayout.setRefreshing(false);
+            refreshLayout.setRefreshing(false);
         } else {
             if (!isNoData) {
                 isShowFooter = false;
                 meRefreshListAdapter.setShowFooter(isShowFooter);
             }
         }
-        refreshLayout.setRefreshing(false);
     }
 
     private void showData(boolean b) {

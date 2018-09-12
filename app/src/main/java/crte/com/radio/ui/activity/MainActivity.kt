@@ -1,23 +1,22 @@
-package crte.com.radio
+package crte.com.radio.ui.activity
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import crte.com.radio.activity.BaseActivity
-import crte.com.radio.activity.ContactActivity
+import crte.com.radio.R
 import crte.com.radio.api.ApiServiceHelper
 import crte.com.radio.api.BaseListResponseResult
-import crte.com.radio.entry.Contact
-import crte.com.radio.entry.NormalMessageEvent
-import crte.com.radio.entry.StatusMessageEvent
 import crte.com.radio.entry.User
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : BaseActivity() {
+    val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,26 +49,19 @@ class MainActivity : BaseActivity() {
 
                     })
         }
-
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onReceiveMessage(msgEvent: StatusMessageEvent) {
-        when (msgEvent.code) {
-            -1 -> {
-                var contact: Contact = msgEvent.obj as Contact
-                log(msgEvent.message!! + contact.name)
-                showToast(msgEvent.message!! + contact.name)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            for (permission in permissions) {
+                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(permissions, 101)
+                    return
+                }
             }
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onReceiveNormalMessage(normalMessageEvent: NormalMessageEvent) {
-        when (normalMessageEvent.code) {
-            -1 -> {
-                showToast(normalMessageEvent.msg!!)
-            }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 101) {
         }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }

@@ -15,7 +15,7 @@ public class ApiServiceHelper {
     private ApiService apiService;
     private Retrofit retrofit;
 
-    private ApiServiceHelper(){
+    private ApiServiceHelper() {
         //日志拦截器
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -23,6 +23,8 @@ public class ApiServiceHelper {
                 .addInterceptor(loggingInterceptor)
                 .retryOnConnectionFailure(true)
                 .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .build();
         retrofit = new Retrofit.Builder()
                 .client(client)
@@ -33,8 +35,8 @@ public class ApiServiceHelper {
         apiService = retrofit.create(ApiService.class);
     }
 
-    public static ApiServiceHelper getInstance(){
-        if(instance==null){
+    public static ApiServiceHelper getInstance() {
+        if (instance == null) {
             instance = new ApiServiceHelper();
         }
         return instance;

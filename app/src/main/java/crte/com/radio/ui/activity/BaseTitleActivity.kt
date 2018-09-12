@@ -1,4 +1,4 @@
-package crte.com.radio.activity
+package crte.com.radio.ui.activity
 
 import android.view.View
 import kotlinx.android.synthetic.main.title_bar.*
