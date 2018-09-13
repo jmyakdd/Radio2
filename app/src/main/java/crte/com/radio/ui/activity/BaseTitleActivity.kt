@@ -15,4 +15,9 @@ abstract class BaseTitleActivity : BaseActivity() {
     fun setTitle(titleStr: String) {
         title_txt.text = titleStr
     }
+
+    fun setRight(rightStr: String, listener: View.OnClickListener) {
+        right_txt.text = rightStr
+        right_txt.setOnClickListener(listener)
+    }
 }

@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="textSize" format="dimension" />
+    <attr name="text" format="string" />
+    <attr name="textColor" format="color" />
+    <attr name="title" format="string" />
+    <attr name="titleSize" format="dimension" />
+    <attr name="titleColor" format="color" />
+    <attr name="hint" format="string" />
+    <attr name="hintColor" format="dimension" />
     <declare-styleable name="MyViewStyle">
-        <attr name="textSize" format="dimension" />
-        <attr name="text" format="string" />
+        <attr name="textSize" />
+        <attr name="text" />
+        <attr name="textColor" />
         <attr name="circleColor" format="color" />
         <attr name="arcColor" format="color" />
-        <attr name="textColor" format="color" />
         <attr name="startAngle" format="integer" />
         <attr name="percent" format="float" />
         <attr name="backgroundColor" format="color" />
         <attr name="isNeedBorder" format="boolean" />
         <attr name="borderColor" format="color" />
         <attr name="borderWidth" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MyTitleEditText">
+        <attr name="textSize" />
+        <attr name="text" />
+        <attr name="textColor" />
+        <attr name="title" />
+        <attr name="titleSize" />
+        <attr name="titleColor" />
+        <attr name="hint" />
+        <attr name="hintColor" />
     </declare-styleable>
 </resources>

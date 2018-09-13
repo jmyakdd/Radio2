@@ -1,5 +1,7 @@
 package crte.com.radio.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -18,10 +20,15 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewMod
     lateinit var viewModel: ContactViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        log(System.currentTimeMillis().toString())
         binding = DataBindingUtil.setContentView(this, R.layout.activity_contact)
         setBack()
         setTitle("通讯录")
+        setRight("编辑", object : View.OnClickListener {
+            override fun onClick(v: View?) {
+//                jump(EditContactActivity::class.java)
+                startActivityForResult(Intent(this@ContactActivity, EditContactActivity::class.java), 101)
+            }
+        })
         viewModel = ContactViewModel(this, this)
         var adapter = ContactAdapter(this, viewModel.datas.get()!!)
 //        binding.viewModel = viewModel
@@ -38,14 +45,20 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewMod
                 ToastUtil.showShort(viewModel.datas.get()!!.get(position).name)
             }
         })
-
-        log(System.currentTimeMillis().toString())
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 101) {
+            if (resultCode == Activity.RESULT_OK) {
+                binding.myRecyclerview.startRefresh()
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
         binding.myRecyclerview.startRefresh()
-        log(System.currentTimeMillis().toString())
     }
 
     override fun completeRefresh() {

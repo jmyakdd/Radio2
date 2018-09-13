@@ -2,6 +2,7 @@ package crte.com.radio.viewModel
 
 import android.content.Context
 import android.databinding.ObservableField
+import crte.com.radio.dao.TestUserModel
 import crte.com.radio.entry.Contact
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -86,11 +87,12 @@ class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack) {
     }
 
     fun getData() {
-        for (i in 0..20) {
-            var d = Contact()
-            d.id = i
-            d.name = "name${i}"
-            datas.get()!!.add(d)
+        var list = TestUserModel.selectUserList()
+        for (data in list) {
+            var contact = Contact()
+            contact.id = data.id
+            contact.name = data.name
+            datas.get()!!.add(contact)
         }
     }
 

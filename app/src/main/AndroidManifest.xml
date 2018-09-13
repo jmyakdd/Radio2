@@ -25,6 +25,8 @@
         <activity android:name="crte.com.radio.ui.activity.LoginActivity">
 
         </activity>
+
+        <activity android:name=".ui.activity.EditContactActivity"/>
     </application>
 
 </manifest>
