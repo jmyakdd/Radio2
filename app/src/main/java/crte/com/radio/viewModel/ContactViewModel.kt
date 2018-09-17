@@ -2,8 +2,9 @@ package crte.com.radio.viewModel
 
 import android.content.Context
 import android.databinding.ObservableField
-import crte.com.radio.dao.TestUserModel
+import crte.com.radio.dao.ContactDbModel
 import crte.com.radio.entry.Contact
+import crte.com.radio.entry.NormalMessageEvent
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe
@@ -12,7 +13,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack) {
+class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack):NormalMessageDataDealInf {
+    override fun dealMessage(msg: NormalMessageEvent?) {
+
+    }
+
     val datas: ObservableField<MutableList<Contact>> = ObservableField()
     var page = 1
 
@@ -87,7 +92,7 @@ class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack) {
     }
 
     fun getData() {
-        var list = TestUserModel.selectUserList()
+        var list = ContactDbModel.selectUserList()
         for (data in list) {
             var contact = Contact()
             contact.id = data.id

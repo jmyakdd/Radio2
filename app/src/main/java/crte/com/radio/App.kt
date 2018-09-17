@@ -2,8 +2,10 @@ package crte.com.radio
 
 import android.app.Application
 import android.database.sqlite.SQLiteDatabase
+import android.os.Environment
 import crte.com.greendao.DaoMaster
 import crte.com.greendao.DaoSession
+import crte.com.radio.util.MyLogUtil
 
 class App : Application() {
 
@@ -24,6 +26,18 @@ class App : Application() {
         super.onCreate()
         instance = this
         initDataBase()
+        initStorage()
+    }
+
+    private fun initStorage() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            MyLogUtil.isCanStorage = true
+        } else {
+            MyLogUtil.isCanStorage = false
+            return
+        }
+        MyLogUtil.getInternalMemorySize(this)
+        MyLogUtil.getAvailableInternalMemorySize(this)
     }
 
     fun initDataBase() {

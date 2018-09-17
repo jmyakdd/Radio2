@@ -2,6 +2,8 @@ package crte.com.radio.entry;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class Voice {
@@ -10,11 +12,11 @@ public class Voice {
     private Long num;
     private String fileName;
     private String filePath;
-
+    @Keep
     public Voice(){
 
     }
-
+    @Keep
     public Voice(Long id, Long num, String fileName, String filePath) {
         this.id = id;
         this.num = num;

@@ -3,8 +3,8 @@ package crte.com.radio.viewModel;
 import android.content.Context;
 import android.databinding.ObservableField;
 
-import crte.com.radio.dao.TestUserModel;
-import crte.com.radio.entry.TestUser;
+import crte.com.radio.dao.ContactDbModel;
+import crte.com.radio.entry.ContactDb;
 import crte.com.radio.util.ToastUtil;
 
 public class EditContactViewModel {
@@ -33,8 +33,8 @@ public class EditContactViewModel {
             ToastUtil.showShort("年龄不能为空");
             return;
         }
-        TestUser user = new TestUser(Long.parseLong(id.get()), name.get(), Integer.parseInt(age.get()));
-        long result = TestUserModel.insert(user);
+        ContactDb user = new ContactDb(Long.parseLong(id.get()), name.get(), Integer.parseInt(age.get()));
+        long result = ContactDbModel.insert(user);
         if (result == 0) {
             callBack.saveFail();
         } else {

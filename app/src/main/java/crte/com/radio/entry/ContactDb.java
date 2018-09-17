@@ -2,26 +2,27 @@ package crte.com.radio.entry;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(generateConstructors = false)
-public class TestUser {
+public class ContactDb {
     @Id
     private Long id;
     private String name;
     private Integer age;
 
-    public TestUser(String name, Integer age) {
+    public ContactDb(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    public TestUser(Long id, String name, Integer age) {
+    public ContactDb(Long id, String name, Integer age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
 
-    public TestUser() {
+    public ContactDb() {
     }
 
     public Long getId() {
