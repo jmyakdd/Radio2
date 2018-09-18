@@ -41,6 +41,12 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
         contact.setOnClickListener {
             jump(ContactActivity::class.java)
         }
+        message.setOnClickListener {
+            jump(MessageActivity::class.java)
+        }
+        about.setOnClickListener {
+            jump(AboutActivity::class.java)
+        }
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(applicationContext)) {
@@ -50,7 +56,7 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
                 startActivityForResult(intent, 100)
             } else {
                 //执行6.0以上绘制代码
-                startService(Intent(this, RadioService::class.java))
+//                startService(Intent(this, RadioService::class.java))
             }
             for (permission in permissions) {
                 if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {

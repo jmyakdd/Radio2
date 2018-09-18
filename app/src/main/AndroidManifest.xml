@@ -31,6 +31,10 @@
         <activity android:name=".ui.activity.EditContactActivity" />
         <activity android:name=".ui.activity.WorkListActivity" />
         <activity android:name=".ui.activity.FunctionActivity" />
+        <activity android:name=".ui.activity.MessageActivity" />
+        <activity android:name=".ui.activity.MessageDetailActivity" />
+        <activity android:name=".ui.activity.ReplyMessageActivity" />
+        <activity android:name=".ui.activity.AboutActivity" />
 
         <service android:name=".service.RadioService" />
     </application>

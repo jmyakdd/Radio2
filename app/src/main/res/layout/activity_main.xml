@@ -23,6 +23,7 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/message"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
@@ -30,6 +31,7 @@
                 android:src="@mipmap/icon_message" />
 
             <TextView
+                android:id="@+id/about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -65,17 +67,17 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/menu"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_alignParentLeft="true"
+                android:layout_marginStart="10dp"
                 android:gravity="center"
                 android:text="功能"
                 android:textColor="#000000"
@@ -83,13 +85,14 @@
 
             <TextView
                 android:id="@+id/contact"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:layout_weight="1"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:text="通讯录"
                 android:textColor="#000000"
                 android:textSize="20sp" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </layout>
