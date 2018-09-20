@@ -2,6 +2,8 @@ package crte.com.radio.service;
 
 import android.app.AlertDialog;
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
@@ -11,16 +13,23 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.WindowManager;
 
+import java.lang.ref.WeakReference;
+
 public class RadioService extends Service {
-    private Handler handler = new Handler() {
+    private Handler handler = new MyHandler(this);
+
+    public static final String CALL_START = "com.crte.radio.CALL_START";
+    public static final String CALL_END = "com.crte.radio.CALL_END";
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case CALL_START:
                     showDialog();
                     break;
-                case 1:
+                case CALL_END:
                     cancelDialog();
                     break;
             }
@@ -90,5 +99,29 @@ public class RadioService extends Service {
 
     private void cancelDialog() {
         alertDialog.cancel();
+    }
+
+    static class MyHandler extends Handler {
+        WeakReference<Service> mWeakReference;
+
+        public MyHandler(Service service) {
+            mWeakReference = new WeakReference<>(service);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            final RadioService service = (RadioService) mWeakReference.get();
+            if (service != null) {
+                switch (msg.what) {
+                    case 0:
+                        service.showDialog();
+                        break;
+                    case 1:
+                        service.cancelDialog();
+                        break;
+                }
+            }
+            super.handleMessage(msg);
+        }
     }
 }

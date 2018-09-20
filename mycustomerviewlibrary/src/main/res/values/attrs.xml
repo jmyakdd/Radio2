@@ -21,15 +21,4 @@
         <attr name="borderColor" format="color" />
         <attr name="borderWidth" format="integer" />
     </declare-styleable>
-
-    <declare-styleable name="MyTitleEditText">
-        <attr name="textSize" />
-        <attr name="text" />
-        <attr name="textColor" />
-        <attr name="title" />
-        <attr name="titleSize" />
-        <attr name="titleColor" />
-        <attr name="hint" />
-        <attr name="hintColor" />
-    </declare-styleable>
 </resources>

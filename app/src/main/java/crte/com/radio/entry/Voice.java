@@ -12,6 +12,7 @@ public class Voice {
     private Long num;
     private String fileName;
     private String filePath;
+    private long time;
     @Keep
     public Voice(){
 
@@ -22,6 +23,14 @@ public class Voice {
         this.num = num;
         this.fileName = fileName;
         this.filePath = filePath;
+    }
+    @Generated(hash = 2020319746)
+    public Voice(Long id, Long num, String fileName, String filePath, long time) {
+        this.id = id;
+        this.num = num;
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.time = time;
     }
 
     public Long getId() {
@@ -54,5 +63,13 @@ public class Voice {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }

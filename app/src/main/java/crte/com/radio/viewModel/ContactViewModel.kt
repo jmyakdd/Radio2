@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack):NormalMessageDataDealInf {
+class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack) : NormalMessageDataDealInf {
     override fun dealMessage(msg: NormalMessageEvent?) {
 
     }
@@ -93,12 +93,7 @@ class ContactViewModel(val context: Context, val viewCallBack: ViewCallBack):Nor
 
     fun getData() {
         var list = ContactDbModel.selectUserList()
-        for (data in list) {
-            var contact = Contact()
-            contact.id = data.id
-            contact.name = data.name
-            datas.get()!!.add(contact)
-        }
+        datas.get()!!.addAll(list)
     }
 
     interface ViewCallBack {

@@ -11,7 +11,6 @@ import android.provider.Settings
 import crte.com.radio.R
 import crte.com.radio.databinding.ActivityMainBinding
 import crte.com.radio.entry.NormalMessageEvent
-import crte.com.radio.service.RadioService
 import crte.com.radio.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.Subscribe
@@ -25,7 +24,9 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
 
     val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.SYSTEM_ALERT_WINDOW)
+            Manifest.permission.SYSTEM_ALERT_WINDOW,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.CAMERA)
 
     lateinit var mainViewModel: MainViewModel
     lateinit var binding: ActivityMainBinding
@@ -68,14 +69,14 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
     }
 
     override fun onDestroy() {
-        stopService(Intent(this, RadioService::class.java))
+//        stopService(Intent(this, RadioService::class.java))
         super.onDestroy()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100) {
-            startService(Intent(this, RadioService::class.java))
+//            startService(Intent(this, RadioService::class.java))
         }
     }
 

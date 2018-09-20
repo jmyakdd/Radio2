@@ -25,7 +25,6 @@ public class DateTimeUtil {
         if (timeStamp == 0) {
             return "";
         }
-        timeStamp = timeStamp * 1000;
         String result = "";
         SimpleDateFormat format = new SimpleDateFormat(dataFormat);
         result = format.format(new Date(timeStamp));

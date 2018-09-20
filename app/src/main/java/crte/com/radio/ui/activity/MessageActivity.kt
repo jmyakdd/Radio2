@@ -59,8 +59,9 @@ class MessageActivity : BaseTitleActivity(), MessageViewModel.ViewCallBack, Mult
         binding.myRv.setLoadListener(this)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         binding.myRv.startRefresh()
     }
+
 }

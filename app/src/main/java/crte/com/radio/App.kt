@@ -5,11 +5,12 @@ import android.database.sqlite.SQLiteDatabase
 import android.os.Environment
 import crte.com.greendao.DaoMaster
 import crte.com.greendao.DaoSession
+import crte.com.greendao.MyOpenHelper
 import crte.com.radio.util.MyLogUtil
 
 class App : Application() {
 
-    private lateinit var mHelper: DaoMaster.DevOpenHelper
+    private lateinit var mHelper: MyOpenHelper
     private lateinit var db: SQLiteDatabase
     private lateinit var mDaoMaster: DaoMaster
     private lateinit var mDaoSession: DaoSession
@@ -41,7 +42,7 @@ class App : Application() {
     }
 
     fun initDataBase() {
-        mHelper = DaoMaster.DevOpenHelper(this, "test-db", null)
+        mHelper = MyOpenHelper(this, "radio-db", null)
         db = mHelper.writableDatabase
         mDaoMaster = DaoMaster(db)
         mDaoSession = mDaoMaster.newSession()

@@ -18,6 +18,7 @@ class FunctionActivity : BaseTitleActivity(), FunctionViewModel.ViewCallBack {
         setBack()
         setTitle("功能")
         binding.work.setOnClickListener { jump(WorkListActivity::class.java) }
-        binding.record.setOnClickListener { jump(WorkListActivity::class.java) }
+        binding.record.setOnClickListener { jump(AudioActivity::class.java) }
+        binding.video.setOnClickListener { jump(VideoActivity::class.java) }
     }
 }

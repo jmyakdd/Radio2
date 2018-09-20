@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import crte.com.radio.api.ApiService
 import crte.com.radio.api.ApiServiceHelper
-import crte.com.radio.entry.Contact
 import crte.com.radio.entry.StatusMessageEvent
-import crte.com.radio.util.ToastUtil
 import kotlinx.android.synthetic.main.status_bar.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -30,11 +28,7 @@ abstract class BaseActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onReceiveMessage(msgEvent: StatusMessageEvent) {
         when (msgEvent.code) {
-            -1 -> {
-                var contact: Contact = msgEvent.obj as Contact
-                log(msgEvent.message!! + contact.name)
-                ToastUtil.showShort(msgEvent.message!! + contact.name)
-            }
+
         }
     }
 

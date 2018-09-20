@@ -5,24 +5,30 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(generateConstructors = false)
-public class ContactDb {
+public class Contact {
     @Id
     private Long id;
     private String name;
-    private Integer age;
+    private Long num;
 
-    public ContactDb(String name, Integer age) {
+    public Contact(String name, Integer age) {
         this.name = name;
-        this.age = age;
     }
 
-    public ContactDb(Long id, String name, Integer age) {
+    public Contact(Long id, String name, Integer age) {
         this.id = id;
         this.name = name;
-        this.age = age;
     }
 
-    public ContactDb() {
+    public Contact() {
+    }
+
+    public Long getNum() {
+        return num;
+    }
+
+    public void setNum(Long num) {
+        this.num = num;
     }
 
     public Long getId() {
@@ -39,13 +45,5 @@ public class ContactDb {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
     }
 }

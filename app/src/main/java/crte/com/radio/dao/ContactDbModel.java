@@ -2,24 +2,24 @@ package crte.com.radio.dao;
 
 import java.util.List;
 
-import crte.com.greendao.ContactDbDao;
+import crte.com.greendao.ContactDao;
 import crte.com.radio.App;
-import crte.com.radio.entry.ContactDb;
+import crte.com.radio.entry.Contact;
 
 public class ContactDbModel {
-    private static ContactDbDao dao = App.instance.getDaoSession().getContactDbDao();
+    private static ContactDao dao = App.instance.getDaoSession().getContactDao();
 
     public static long insert(String name, Integer age) {
-        ContactDb testUser = new ContactDb(name, age);
+        Contact testUser = new Contact(name, age);
         return dao.insert(testUser);
     }
 
-    public static long insert(ContactDb user) {
+    public static long insert(Contact user) {
         return dao.insertOrReplace(user);
     }
 
-    public static ContactDb selectUserById(long id) {
-        List<ContactDb> list = dao.queryBuilder().where(ContactDbDao.Properties.Id.eq(id)).list();
+    public static Contact selectUserById(long id) {
+        List<Contact> list = dao.queryBuilder().where(ContactDao.Properties.Id.eq(id)).list();
         if (list.size() == 0) {
             return null;
         } else {
@@ -27,12 +27,12 @@ public class ContactDbModel {
         }
     }
 
-    public static List<ContactDb> selectUserList() {
+    public static List<Contact> selectUserList() {
         return dao.queryBuilder().list();
     }
 
-    public static List<ContactDb> selectUserList(String name) {
-        return dao.queryBuilder().where(ContactDbDao.Properties.Name.eq(name))
+    public static List<Contact> selectUserList(String name) {
+        return dao.queryBuilder().where(ContactDao.Properties.Name.eq(name))
                 .list();
     }
 
@@ -40,11 +40,11 @@ public class ContactDbModel {
         dao.deleteByKey(id);
     }
 
-    public static void deleteByObject(ContactDb user) {
+    public static void deleteByObject(Contact user) {
         dao.delete(user);
     }
 
-    public static void update(ContactDb user) {
+    public static void update(Contact user) {
         dao.update(user);
     }
 }
