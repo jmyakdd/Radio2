@@ -46,6 +46,8 @@ public class ReceiveThread implements Runnable {
     private final static int RECEIVE_BROADCAST_CALL_STATUS = 0xB41E;
     private final static int RECEIVE_BROADCAST_CHANNEL_CHANGE = 0xB40D;
 
+    private final static int RECEIVE_BROADCAST_WORK = 0x0120;
+
     private void analyticalData(byte[] data) {
         int code = DataConvert.byteToInt(data, 0, 2);
         switch (code) {
@@ -58,8 +60,18 @@ public class ReceiveThread implements Runnable {
             case RECEIVE_BROADCAST_CHANNEL_CHANGE:
                 receiveChannelChangeData(data);
                 break;
+            case RECEIVE_BROADCAST_WORK:
+                receiveWorkMsg(data);
+                break;
 
         }
+    }
+
+    private void receiveWorkMsg(byte[] data) {
+        int groupId = DataConvert.byteToInt(data,5,3);
+        int length = DataConvert.byteToInt(data,11,2);
+        byte[] content = new byte[length];
+        System.arraycopy(data,13,content,0,length);
     }
 
     private void receiveChannelChangeData(byte[] data) {

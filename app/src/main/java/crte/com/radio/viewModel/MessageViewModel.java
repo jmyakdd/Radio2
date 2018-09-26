@@ -29,9 +29,9 @@ public class MessageViewModel {
         Observable observable = Observable.create(new MyTestObservableOnSubscribe());
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyTestObserver() {
+                .subscribe(new MyTestObserver<String>() {
                     @Override
-                    public void onNext(Object o) {
+                    public void onNext(String s) {
                         data.get().clear();
                         List<Message> list = MessageModel.select();
                         data.get().addAll(list);

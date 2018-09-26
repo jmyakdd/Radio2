@@ -94,11 +94,13 @@ public class RadioService extends Service {
     }
 
     private void showDialog() {
-        alertDialog.show();
+        if (alertDialog != null && !alertDialog.isShowing())
+            alertDialog.show();
     }
 
     private void cancelDialog() {
-        alertDialog.cancel();
+        if (alertDialog != null && alertDialog.isShowing())
+            alertDialog.cancel();
     }
 
     static class MyHandler extends Handler {

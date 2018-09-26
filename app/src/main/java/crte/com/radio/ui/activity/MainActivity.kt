@@ -11,6 +11,7 @@ import android.provider.Settings
 import crte.com.radio.R
 import crte.com.radio.databinding.ActivityMainBinding
 import crte.com.radio.entry.NormalMessageEvent
+import crte.com.radio.util.MyLogUtil
 import crte.com.radio.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.Subscribe
@@ -38,15 +39,19 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
         binding.viewModel = mainViewModel
         menu.setOnClickListener {
             jump(FunctionActivity::class.java)
+            MyLogUtil.writeCustomerOption("jmupTo:FunctionAcitivity")
         }
         contact.setOnClickListener {
             jump(ContactActivity::class.java)
+            MyLogUtil.writeCustomerOption("jmupTo:ContactActivity")
         }
         message.setOnClickListener {
             jump(MessageActivity::class.java)
+            MyLogUtil.writeCustomerOption("jmupTo:MessageActivity")
         }
         about.setOnClickListener {
             jump(AboutActivity::class.java)
+            MyLogUtil.writeCustomerOption("jmupTo:AboutActivity")
         }
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
