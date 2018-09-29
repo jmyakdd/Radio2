@@ -16,6 +16,7 @@ public class MainViewModel implements NormalMessageDataDealInf{
         this.callBack = callBack;
         single.set("ch2");
         contactName.set("通话组123");
+        single.get();
     }
 
     @Override

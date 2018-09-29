@@ -42,10 +42,18 @@ public class ReceiveThread implements Runnable {
         }
     }
 
+    /**
+     * 广播code
+     */
     private final static int RECEIVE_BROADCAST_PHYSICAL_USER_INPUT = 0xB405;//Physical User Input Broadcast
-    private final static int RECEIVE_BROADCAST_CALL_STATUS = 0xB41E;
-    private final static int RECEIVE_BROADCAST_CHANNEL_CHANGE = 0xB40D;
+    private final static int RECEIVE_BROADCAST_CALL_STATUS = 0xB41E;//呼叫状态
+    private final static int RECEIVE_BROADCAST_CHANNEL_CHANGE = 0xB40D;//信道切换
+    private final static int RECEIVE_BROADCAST_TONE = 0xB409;//播放Tone音
+    private final static int RECEIVE_BROADCAST_VOLUME = 0xB406;//音量控制
 
+    /**
+     * 工单code
+     */
     private final static int RECEIVE_BROADCAST_WORK = 0x0120;
 
     private void analyticalData(byte[] data) {
@@ -63,25 +71,37 @@ public class ReceiveThread implements Runnable {
             case RECEIVE_BROADCAST_WORK:
                 receiveWorkMsg(data);
                 break;
+            case RECEIVE_BROADCAST_TONE:
+
+                break;
+            case RECEIVE_BROADCAST_VOLUME:
+                receiveVolumeChangeData(data);
+                break;
 
         }
     }
 
+    private void receiveVolumeChangeData(byte[] data) {
+        //当前音量 range 0~255
+        int volumeData = data[4];
+    }
+
     private void receiveWorkMsg(byte[] data) {
-        int groupId = DataConvert.byteToInt(data,5,3);
-        int length = DataConvert.byteToInt(data,11,2);
+        int groupId = DataConvert.byteToInt(data, 5, 3);
+        int length = DataConvert.byteToInt(data, 11, 2);
         byte[] content = new byte[length];
-        System.arraycopy(data,13,content,0,length);
+        System.arraycopy(data, 13, content, 0, length);
+
+        int head = DataConvert.byteToInt(content,0,3);
+
     }
 
     private void receiveChannelChangeData(byte[] data) {
-
+        int channelNum = DataConvert.byteToInt(data, 4, 2);//获取信道号
+        if (data.length >= 7) {
+            int status = data[6];
+        }
     }
-
-    private static final byte Fun_Feature_Disabled = 0x10;
-    private static final byte Fun_Radio_Busy = 0x11;
-    private static final byte Fun_Invalid_Target_Address = 0x12;
-    private static final byte Fun_System_Busy = 0x13;
 
     private static final byte Type_No_Call_Feature = 0x00;
     private static final byte Type_Selective_Call = 0x01;
@@ -118,7 +138,8 @@ public class ReceiveThread implements Runnable {
                 break;
             case Type_Private_Phone_Call:
                 break;
-            case Type_Group_Call:
+            case Type_Group_Call://组呼
+                getCallStatus(data);
                 break;
             case Type_Call_Alert_With_Voice:
                 break;
@@ -126,14 +147,15 @@ public class ReceiveThread implements Runnable {
                 break;
             case Type_Group_Phone_Call:
                 break;
-            /*case Fun_Feature_Disabled:
+        }
+    }
+
+    private void getCallStatus(byte[] data) {
+        switch (data[3]) {
+            case State_Call_Ended://语音结束
                 break;
-            case Fun_Radio_Busy:
+            case State_Call_Initiated://语音开始
                 break;
-            case Fun_Invalid_Target_Address:
-                break;
-            case Fun_System_Busy:
-                break;*/
         }
     }
 

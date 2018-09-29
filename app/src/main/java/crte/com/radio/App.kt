@@ -1,14 +1,18 @@
 package crte.com.radio
 
 import android.app.Application
+import android.content.IntentFilter
 import android.database.sqlite.SQLiteDatabase
+import android.net.ConnectivityManager
 import android.os.Environment
 import crte.com.greendao.DaoMaster
 import crte.com.greendao.DaoSession
 import crte.com.greendao.MyOpenHelper
+import crte.com.radio.receiver.NetWorkStatusReceive
 import crte.com.radio.util.MyLogUtil
 
 class App : Application() {
+    var netReceive = NetWorkStatusReceive()
 
     private lateinit var mHelper: MyOpenHelper
     private lateinit var db: SQLiteDatabase
@@ -28,7 +32,20 @@ class App : Application() {
         instance = this
         initDataBase()
         initStorage()
+        initNetReceiver()
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        unregisterReceiver(netReceive)
+    }
+
+    private fun initNetReceiver() {
+        var filter = IntentFilter()
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(netReceive, filter)
+    }
+
 
     private fun initStorage() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {

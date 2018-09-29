@@ -12,7 +12,6 @@ public class EditContactViewModel {
     private ViewCallBack callBack;
 
     public final ObservableField<String> id = new ObservableField();
-    public final ObservableField<String> age = new ObservableField();
     public final ObservableField<String> name = new ObservableField();
 
     public EditContactViewModel(Context context, ViewCallBack callBack) {
@@ -29,11 +28,7 @@ public class EditContactViewModel {
             ToastUtil.showShort("昵称不能为空");
             return;
         }
-        if (age.get() == null || age.get().equals("")) {
-            ToastUtil.showShort("年龄不能为空");
-            return;
-        }
-        Contact user = new Contact(Long.parseLong(id.get()), name.get(), Integer.parseInt(age.get()));
+        Contact user = new Contact(Long.parseLong(id.get()), name.get());
         long result = ContactDbModel.insert(user);
         if (result == 0) {
             callBack.saveFail();
@@ -45,7 +40,6 @@ public class EditContactViewModel {
     public void clear() {
         id.set("");
         name.set("");
-        age.set("");
     }
 
     public interface ViewCallBack {

@@ -48,8 +48,10 @@ public class RadioService extends Service {
     public void onCreate() {
         super.onCreate();
         initDialog();
-        receiveThread = new ReceiveThread(handler);
-        new Thread(receiveThread).start();
+
+
+//        receiveThread = new ReceiveThread(handler);
+//        new Thread(receiveThread).start();
     }
 
     @Override

@@ -9,8 +9,8 @@ import crte.com.radio.entry.Contact;
 public class ContactDbModel {
     private static ContactDao dao = App.instance.getDaoSession().getContactDao();
 
-    public static long insert(String name, Integer age) {
-        Contact testUser = new Contact(name, age);
+    public static long insert(String name) {
+        Contact testUser = new Contact(name);
         return dao.insert(testUser);
     }
 

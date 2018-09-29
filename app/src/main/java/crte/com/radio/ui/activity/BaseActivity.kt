@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import crte.com.radio.api.ApiService
 import crte.com.radio.api.ApiServiceHelper
+import crte.com.radio.entry.NetStateMessageEvent
 import crte.com.radio.entry.StatusMessageEvent
+import crte.com.radio.util.NetUtil
+import crte.com.radio.util.ToastUtil
 import kotlinx.android.synthetic.main.status_bar.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -30,6 +33,27 @@ abstract class BaseActivity : AppCompatActivity() {
         when (msgEvent.code) {
 
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onReceiveNetMessage(msgEvent: NetStateMessageEvent) {
+        when (msgEvent.code) {
+            NetUtil.NETWORK_NONE -> showNoneNet()
+            NetUtil.NETWORK_MOBILE -> showMobileNet()
+            NetUtil.NETWORK_WIFI -> showWifiNet()
+        }
+    }
+
+    open fun showMobileNet() {
+        ToastUtil.showShort("当前使用的是移动4G网络")
+    }
+
+    open fun showWifiNet() {
+        ToastUtil.showShort("当前使用的是无线wifi网络")
+    }
+
+    open fun showNoneNet() {
+        ToastUtil.showShort("当前无网络连接")
     }
 
     override fun onDestroy() {

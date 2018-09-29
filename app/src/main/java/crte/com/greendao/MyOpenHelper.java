@@ -23,7 +23,7 @@ public class MyOpenHelper extends DaoMaster.OpenHelper {
     public void onUpgrade(Database db, int oldVersion, int newVersion) {
         Log.e("dbUpdate", oldVersion + " " + newVersion);
         //操作数据库的更新 有几个表升级都可以传入到下面
-        MigrationHelper.getInstance().migrate(db, VoiceDao.class);
+        MigrationHelper.getInstance().migrate(db, ContactDao.class);
     }
 
 }

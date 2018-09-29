@@ -11,7 +11,7 @@ class ContactAdapter(val context: Context, val data: MutableList<Contact>)
     override fun convert(holder: ViewHolder?, t: Contact?, position: Int) {
         if (holder != null) {
             if (t != null) {
-                holder.setText(R.id.contact_name, t.name)
+                holder.setText(R.id.contact_name, t.id.toString()+" "+t.name)
             }
         }
     }

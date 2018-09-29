@@ -9,26 +9,17 @@ public class Contact {
     @Id
     private Long id;
     private String name;
-    private Long num;
 
-    public Contact(String name, Integer age) {
+    public Contact(String name) {
         this.name = name;
     }
 
-    public Contact(Long id, String name, Integer age) {
+    public Contact(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public Contact() {
-    }
-
-    public Long getNum() {
-        return num;
-    }
-
-    public void setNum(Long num) {
-        this.num = num;
     }
 
     public Long getId() {

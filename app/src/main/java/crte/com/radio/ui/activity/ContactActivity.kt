@@ -1,6 +1,7 @@
 package crte.com.radio.ui.activity
 
 import android.app.Activity
+import android.app.AlarmManager
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -29,6 +30,7 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewMod
                 startActivityForResult(Intent(this@ContactActivity, EditContactActivity::class.java), 101)
             }
         })
+        var alarmManager:AlarmManager
         viewModel = ContactViewModel(this, this)
         var adapter = ContactAdapter(this, viewModel.datas.get()!!)
 //        binding.viewModel = viewModel
