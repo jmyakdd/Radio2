@@ -24,8 +24,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        setRssiLevel(3)
-        setBatteryLevel(50)
+        setRssiLevel(100)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -61,12 +60,73 @@ abstract class BaseActivity : AppCompatActivity() {
         EventBus.getDefault().unregister(this)
     }
 
-    fun setRssiLevel(level: Int) {
+    /**
+     * 设置rssi值 0~255
+     * level 0-4
+     * rssi<85 4
+     * 85<rssi<100 3
+     * 100<rssi<105 2
+     * 105<rssi<110 1
+     * rssi>110 0
+     */
+    fun setRssiLevel(rssi: Int) {
+        var level: Int
+        if (rssi < 85) {
+            level = 4
+        } else if (rssi >= 85 && rssi < 100) {
+            level = 3
+        } else if (rssi >= 100 && rssi < 105) {
+            level = 2
+        } else if (rssi >= 105 && rssi < 110) {
+            level = 1
+        } else if (rssi >= 110) {
+            level = 0
+        } else {
+            level = 0
+        }
         iv_rssi.drawable.setLevel(10000 * level / 4)
     }
 
+    /**
+     * 设置电池电量 0~100
+     */
     fun setBatteryLevel(level: Int) {
         iv_battery.drawable.setLevel(10000 * level / 100)
+    }
+
+    /**
+     * 设置发射状态
+     */
+    fun setTransmitMode(state: Int) {
+
+    }
+
+    /**
+     * 设置wifi状态
+     */
+    fun setWifiStatus(state: Boolean) {
+
+    }
+
+    /**
+     * 设置Gps状态
+     */
+    fun setGpsStatus(state: Boolean) {
+
+    }
+
+    /**
+     * 直至直通模式
+     */
+    fun setConnectMode(mode: Int) {
+
+    }
+
+    /**
+     * 设置与电台建联状态
+     */
+    fun setConnectStatus(status: Boolean) {
+
     }
 
     fun jump(clazz: Class<*>) {

@@ -49,7 +49,17 @@
         android:layout_height="16dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/iv_model" />
+        android:layout_toRightOf="@id/iv_model"
+        android:src="@mipmap/bluetooth" />
+
+    <ImageView
+        android:id="@+id/iv_gps"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/iv_bluetooth"
+        android:src="@mipmap/gps" />
 
     <ImageView
         android:id="@+id/iv_connect_status"
@@ -57,7 +67,8 @@
         android:layout_height="16dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/iv_bluetooth" />
+        android:layout_toRightOf="@id/iv_gps"
+        android:src="@mipmap/connect_status" />
 
     <ImageView
         android:id="@+id/iv_battery"

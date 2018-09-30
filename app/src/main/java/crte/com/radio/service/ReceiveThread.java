@@ -2,6 +2,7 @@ package crte.com.radio.service;
 
 
 import crte.com.radio.util.DataConvert;
+import crte.com.radio.util.XcmpDataUtil;
 
 public class ReceiveThread implements Runnable {
 
@@ -44,7 +45,8 @@ public class ReceiveThread implements Runnable {
      * 广播code
      */
     private final static int RECEIVE_BROADCAST_PHYSICAL_USER_INPUT = 0xB405;//Physical User Input Broadcast
-    private final static int RECEIVE_BROADCAST_CALL_STATUS = 0xB41E;//呼叫状态
+    private final static int RECEIVE_BROADCAST_CALL_STATUS = 0xB41E;//呼叫控制
+    private final static int RECEIVE_BROADCAST_TRANSMIT_CONTROL = 0xB415;//传输状态
     private final static int RECEIVE_BROADCAST_CHANNEL_CHANGE = 0xB40D;//信道切换
     private final static int RECEIVE_BROADCAST_TONE = 0xB409;//播放Tone音
     private final static int RECEIVE_BROADCAST_VOLUME = 0xB406;//音量控制
@@ -53,6 +55,11 @@ public class ReceiveThread implements Runnable {
      * 工单code
      */
     private final static int RECEIVE_BROADCAST_WORK = 0x0120;
+
+    /**
+     * 请求Reply
+     */
+    private final static int RECEIVE_REPLY_RADIO_STATUS = 0x800E;
 
     /**
      * 数据解析入口
@@ -69,6 +76,9 @@ public class ReceiveThread implements Runnable {
             case RECEIVE_BROADCAST_CALL_STATUS:
                 receiveCallStatus(data);
                 break;
+            case RECEIVE_BROADCAST_TRANSMIT_CONTROL:
+                receiveTransmitControl(data);
+                break;
             case RECEIVE_BROADCAST_CHANNEL_CHANGE:
                 receiveChannelChangeData(data);
                 break;
@@ -82,6 +92,62 @@ public class ReceiveThread implements Runnable {
                 receiveVolumeChangeData(data);
                 break;
 
+            case RECEIVE_REPLY_RADIO_STATUS:
+                receiveRadioStatus(data);
+                break;
+
+        }
+    }
+
+    private static final int MODE_VOICE = 0x00;
+    private static final int Standby_Receive = 0x00;
+    private static final int Transmit = 0x01;
+    private static final int Transmit_TOT_Warning = 0x02;
+
+    private static final int TX_NO_REASON = 0x00;
+    private static final int LOW_BATTERY_TO_TX = 0x01;
+    private static final int OUT_OF_RANGE = 0x02;
+    private static final int CHANNEL_BUSY = 0x03;//信道忙
+    private static final int NACK_RECEIVED = 0x04;
+    private static final int ACK_FAILED = 0x05;
+    private static final int TIMEOUT_TIMER_EXPIRED = 0x06;
+    private static final int TX_FAILED = 0x07;
+
+    private void receiveTransmitControl(byte[] data) {
+        if (data[2] != MODE_VOICE) {
+            return;
+        }
+        switch (data[3]) {
+            case Standby_Receive://可以接收语音
+                switch (data[4]){
+                    case OUT_OF_RANGE:
+                        break;
+                    case CHANNEL_BUSY:
+                        break;
+                }
+                break;
+            case Transmit://可以开始传输语音
+                break;
+            case Transmit_TOT_Warning:
+                break;
+        }
+    }
+
+    private void receiveRadioStatus(byte[] data) {
+        if (data[2] == 0x01) {
+            return;
+        }
+        switch (data[3]) {
+            case XcmpDataUtil.BASE_INFO_RSSI:
+                break;
+            case XcmpDataUtil.BASE_INFO_MODEL_NUMBER:
+                break;
+            case XcmpDataUtil.BASE_INFO_SERIAL_NUMBER:
+                break;
+            case XcmpDataUtil.BASE_INFO_SIGNALING:
+                break;
+            case XcmpDataUtil.BASE_INFO_RADIO_ID:
+                break;
         }
     }
 
