@@ -63,6 +63,15 @@
                     android:text="@{viewModel.contactName}"
                     android:textColor="@color/black"
                     android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@{viewModel.callStatus}"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
             </LinearLayout>
 
         </RelativeLayout>

@@ -1,40 +1,19 @@
 package crte.com.radio.service;
 
-import android.app.AlertDialog;
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.view.WindowManager;
 
-import java.lang.ref.WeakReference;
+import org.greenrobot.eventbus.EventBus;
 
-public class RadioService extends Service {
-    private Handler handler = new MyHandler(this);
+import crte.com.radio.entry.NormalMessageEvent;
 
-    public static final String CALL_START = "com.crte.radio.CALL_START";
-    public static final String CALL_END = "com.crte.radio.CALL_END";
-
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case CALL_START:
-                    showDialog();
-                    break;
-                case CALL_END:
-                    cancelDialog();
-                    break;
-            }
-        }
-    };
+/**
+ * 后台电台状态信息获取
+ * 负责处理电台状态信息相关广播消息
+ */
+public class RadioService extends Service implements IRadioService{
 
     @Nullable
     @Override
@@ -47,11 +26,8 @@ public class RadioService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        initDialog();
-
-
-//        receiveThread = new ReceiveThread(handler);
-//        new Thread(receiveThread).start();
+        receiveThread = new ReceiveThread(this);
+        new Thread(receiveThread).start();
     }
 
     @Override
@@ -70,62 +46,19 @@ public class RadioService extends Service {
         super.onDestroy();
     }
 
-    private AlertDialog alertDialog;
-
-    private void initDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Receive new Message show or not");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.i("owen", "Yes is clicked");
-            }
-        });
-
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Log.i("owen", "No is clicked");
-            }
-        });
-
-        alertDialog = builder.create();
-        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setCancelable(false);
+    @Override
+    public void callStart() {
+        NormalMessageEvent normalMessageEvent = new NormalMessageEvent();
+        normalMessageEvent.setCode(NormalMessageEvent.CALL_START);
+        normalMessageEvent.setMessage("通话开始");
+        EventBus.getDefault().post(normalMessageEvent);
     }
 
-    private void showDialog() {
-        if (alertDialog != null && !alertDialog.isShowing())
-            alertDialog.show();
-    }
-
-    private void cancelDialog() {
-        if (alertDialog != null && alertDialog.isShowing())
-            alertDialog.cancel();
-    }
-
-    static class MyHandler extends Handler {
-        WeakReference<Service> mWeakReference;
-
-        public MyHandler(Service service) {
-            mWeakReference = new WeakReference<>(service);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            final RadioService service = (RadioService) mWeakReference.get();
-            if (service != null) {
-                switch (msg.what) {
-                    case 0:
-                        service.showDialog();
-                        break;
-                    case 1:
-                        service.cancelDialog();
-                        break;
-                }
-            }
-            super.handleMessage(msg);
-        }
+    @Override
+    public void callEnd() {
+        NormalMessageEvent normalMessageEvent = new NormalMessageEvent();
+        normalMessageEvent.setCode(NormalMessageEvent.CALL_END);
+        normalMessageEvent.setMessage("通话结束");
+        EventBus.getDefault().post(normalMessageEvent);
     }
 }

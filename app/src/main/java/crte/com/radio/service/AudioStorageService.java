@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 public class AudioStorageService extends Service {
     private String filePath = "";
 
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

@@ -19,13 +19,6 @@ import org.greenrobot.eventbus.ThreadMode
 
 
 class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
-    override fun showCallDialog() {
-
-    }
-
-    /*override fun showMobileNet() {
-
-    }*/
 
     val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,

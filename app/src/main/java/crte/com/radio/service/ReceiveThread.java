@@ -1,17 +1,15 @@
 package crte.com.radio.service;
 
 
-import android.os.Handler;
-
 import crte.com.radio.util.DataConvert;
 
 public class ReceiveThread implements Runnable {
 
-    private Handler handler;
     private boolean isStart = false;
+    private IRadioService radioService;
 
-    public ReceiveThread(Handler handler) {
-        this.handler = handler;
+    public ReceiveThread(IRadioService radioService) {
+        this.radioService = radioService;
         isStart = true;
     }
 
@@ -27,15 +25,15 @@ public class ReceiveThread implements Runnable {
             e.printStackTrace();
         }
         while (isStart) {
-            handler.sendEmptyMessage(0);
+            radioService.callStart();
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            handler.sendEmptyMessage(1);
+            radioService.callEnd();
             try {
-                Thread.sleep(3000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -56,7 +54,13 @@ public class ReceiveThread implements Runnable {
      */
     private final static int RECEIVE_BROADCAST_WORK = 0x0120;
 
+    /**
+     * 数据解析入口
+     *
+     * @param data 接收到电台发送来的数据
+     */
     private void analyticalData(byte[] data) {
+        //xcmp code
         int code = DataConvert.byteToInt(data, 0, 2);
         switch (code) {
             case RECEIVE_BROADCAST_PHYSICAL_USER_INPUT:
@@ -92,7 +96,7 @@ public class ReceiveThread implements Runnable {
         byte[] content = new byte[length];
         System.arraycopy(data, 13, content, 0, length);
 
-        int head = DataConvert.byteToInt(content,0,3);
+        int head = DataConvert.byteToInt(content, 0, 3);
 
     }
 
@@ -112,19 +116,6 @@ public class ReceiveThread implements Runnable {
     private static final byte Type_Call_Alert_With_Voice = 0x08;
     private static final byte Type_Telegram_Call = 0x09;
     private static final byte Type_Group_Phone_Call = 0x0A;
-
-    private static final byte State_Call_Decoded = 0x01;
-    private static final byte State_Call_In_Progress = 0x02;
-    private static final byte State_Call_Ended = 0x03;
-    private static final byte State_Call_Initiated = 0x04;
-    private static final byte State_No_Ack = 0x06;
-    private static final byte State_Call_In_Hangtime = 0x07;
-    private static final byte State_Call_Decoded_Clear = 0x08;
-    private static final byte State_Call_Decoded_Key_Matched = 0x09;
-    private static final byte State_Call_Decoded_Key_Mismatched = 0x0A;
-    private static final byte State_Call_Busy_Queued = 0x0B;
-    private static final byte State_Channel_Assigned = 0x0C;
-    private static final byte State_System_Denial = 0x0D;
 
     private void receiveCallStatus(byte[] data) {
         switch (data[2]) {
@@ -149,6 +140,19 @@ public class ReceiveThread implements Runnable {
                 break;
         }
     }
+
+    private static final byte State_Call_Decoded = 0x01;
+    private static final byte State_Call_In_Progress = 0x02;
+    private static final byte State_Call_Ended = 0x03;
+    private static final byte State_Call_Initiated = 0x04;
+    private static final byte State_No_Ack = 0x06;
+    private static final byte State_Call_In_Hangtime = 0x07;
+    private static final byte State_Call_Decoded_Clear = 0x08;
+    private static final byte State_Call_Decoded_Key_Matched = 0x09;
+    private static final byte State_Call_Decoded_Key_Mismatched = 0x0A;
+    private static final byte State_Call_Busy_Queued = 0x0B;
+    private static final byte State_Channel_Assigned = 0x0C;
+    private static final byte State_System_Denial = 0x0D;
 
     private void getCallStatus(byte[] data) {
         switch (data[3]) {
