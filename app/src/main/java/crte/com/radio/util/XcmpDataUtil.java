@@ -32,6 +32,7 @@ public class XcmpDataUtil {
 
     /**
      * _00f
+     * 版本信息
      *
      * @param type
      * @return
@@ -58,6 +59,7 @@ public class XcmpDataUtil {
 
     /**
      * _409
+     * Tone音控制
      *
      * @return
      */
@@ -70,13 +72,19 @@ public class XcmpDataUtil {
 
     /**
      * _407
+     * 喇叭开关控制
      *
+     * @param function 0x0000 静音 0x0001 打开声音 0x0080 查询当前喇叭状态
      * @return
      */
-    public static byte[] sendSpeakerControl() {
-        byte[] data = new byte[10];
+    public static byte[] sendSpeakerControl(int function) {
+        byte[] data = new byte[8];
         data[0] = 0x04;
         data[1] = 0x09;
+        data[2] = (byte) 0xff;
+        data[3] = (byte) 0xff;
+        data[4] = DataConvert.intTo2byte(function)[0];
+        data[5] = DataConvert.intTo2byte(function)[1];
         return data;
     }
 
@@ -86,7 +94,7 @@ public class XcmpDataUtil {
     public static final byte PWR_LVL_HIGH = 0x03;
 
     /**
-     * _407
+     * _408
      * 设置/获取电台发射功率
      *
      * @return
