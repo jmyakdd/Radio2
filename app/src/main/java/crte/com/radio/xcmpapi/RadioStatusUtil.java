@@ -1,4 +1,4 @@
-package crte.com.radio.xcmpdataapi;
+package crte.com.radio.xcmpapi;
 
 import crte.com.radio.util.XcmpDataUtil;
 

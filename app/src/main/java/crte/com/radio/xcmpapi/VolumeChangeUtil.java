@@ -1,4 +1,4 @@
-package crte.com.radio.xcmpdataapi;
+package crte.com.radio.xcmpapi;
 
 public class VolumeChangeUtil {
     public static void receiveVolumeChangeData(byte[] data) {

@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-
 class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
 
     val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE,

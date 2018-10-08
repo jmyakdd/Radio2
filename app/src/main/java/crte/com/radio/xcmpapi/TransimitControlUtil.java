@@ -1,4 +1,4 @@
-package crte.com.radio.xcmpdataapi;
+package crte.com.radio.xcmpapi;
 
 public class TransimitControlUtil {
     private static final int MODE_VOICE = 0x00;

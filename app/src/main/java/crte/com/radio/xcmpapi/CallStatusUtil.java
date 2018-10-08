@@ -1,4 +1,4 @@
-package crte.com.radio.xcmpdataapi;
+package crte.com.radio.xcmpapi;
 
 public class CallStatusUtil {
     private static final byte Type_No_Call_Feature = 0x00;

@@ -7,6 +7,7 @@ import android.util.Log
 import crte.com.radio.api.ApiService
 import crte.com.radio.api.ApiServiceHelper
 import crte.com.radio.entry.NetStateMessageEvent
+import crte.com.radio.entry.StatusMessageCode
 import crte.com.radio.entry.StatusMessageEvent
 import crte.com.radio.util.NetUtil
 import crte.com.radio.util.ToastUtil
@@ -30,7 +31,12 @@ abstract class BaseActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onReceiveMessage(msgEvent: StatusMessageEvent) {
         when (msgEvent.code) {
+            StatusMessageCode.RSSI->{
 
+            }
+            StatusMessageCode.POWER_STATUS->{
+
+            }
         }
     }
 
