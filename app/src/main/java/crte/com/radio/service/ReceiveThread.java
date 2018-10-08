@@ -4,6 +4,7 @@ package crte.com.radio.service;
 import crte.com.radio.util.DataConvert;
 import crte.com.radio.xcmpapi.CallStatusUtil;
 import crte.com.radio.xcmpapi.ChannelChangeUtil;
+import crte.com.radio.xcmpapi.GpsStatusUtil;
 import crte.com.radio.xcmpapi.PUIDataApi;
 import crte.com.radio.xcmpapi.RadioStatusUtil;
 import crte.com.radio.xcmpapi.Test;
@@ -67,6 +68,7 @@ public class ReceiveThread implements Runnable {
      * 请求Reply
      */
     private final static int RECEIVE_REPLY_RADIO_STATUS = 0x800E;
+    private final static int RECEIVE_REPLY_GPS_STATUS = 0x840B;//GPS status
 
     /**
      * 数据解析入口
@@ -100,6 +102,9 @@ public class ReceiveThread implements Runnable {
                 break;
             case RECEIVE_REPLY_RADIO_STATUS:
                 RadioStatusUtil.receiveRadioStatus(data);
+                break;
+            case RECEIVE_REPLY_GPS_STATUS:
+                GpsStatusUtil.receiveGpsStatusData(data);
                 break;
         }
     }

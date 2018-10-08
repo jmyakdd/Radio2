@@ -53,7 +53,7 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
                 startActivityForResult(intent, 100)
             } else {
                 //执行6.0以上绘制代码
-                startService(Intent(this, RadioService::class.java))
+//                startService(Intent(this, RadioService::class.java))
             }
             for (permission in permissions) {
                 if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
@@ -83,7 +83,7 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == 101) {
-            startService(Intent(this, RadioService::class.java))
+//            startService(Intent(this, RadioService::class.java))
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }

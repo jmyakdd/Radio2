@@ -10,6 +10,7 @@ public class XcmpDataUtil {
     public static final byte BASE_INFO_SERIAL_NUMBER = 0x08;
     public static final byte BASE_INFO_SIGNALING = 0x0d;
     public static final byte BASE_INFO_RADIO_ID = 0x0e;
+    public static final byte BASE_INFO_BLUETOOTH = 0x24;
 
     /**
      * _00e

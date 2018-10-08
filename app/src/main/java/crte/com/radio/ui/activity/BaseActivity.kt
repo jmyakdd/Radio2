@@ -29,12 +29,12 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onReceiveMessage(msgEvent: StatusMessageEvent) {
+    fun onReceiveStatusMessage(msgEvent: StatusMessageEvent) {
         when (msgEvent.code) {
-            StatusMessageCode.RSSI->{
+            StatusMessageCode.RSSI -> {
 
             }
-            StatusMessageCode.POWER_STATUS->{
+            StatusMessageCode.POWER_STATUS -> {
 
             }
         }
@@ -104,7 +104,11 @@ abstract class BaseActivity : AppCompatActivity() {
      * 设置发射状态
      */
     fun setTransmitMode(state: Int) {
+        if (state == 0) {//可接收状态
 
+        } else if (state == 1) {//正在发射状态
+
+        }
     }
 
     /**
@@ -122,17 +126,25 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     /**
-     * 直至直通模式
+     * 直通/转接模式
      */
     fun setConnectMode(mode: Int) {
+        if (mode == 0) {//直通状态
 
+        } else {//转接状态
+
+        }
     }
 
     /**
      * 设置与电台建联状态
      */
     fun setConnectStatus(status: Boolean) {
+        if (status) {//建立连接
 
+        } else {//连接断开
+
+        }
     }
 
     fun jump(clazz: Class<*>) {

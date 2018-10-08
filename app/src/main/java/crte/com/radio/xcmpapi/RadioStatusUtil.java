@@ -1,5 +1,10 @@
 package crte.com.radio.xcmpapi;
 
+import org.greenrobot.eventbus.EventBus;
+
+import crte.com.radio.entry.StatusMessageCode;
+import crte.com.radio.entry.StatusMessageEvent;
+import crte.com.radio.util.DataConvert;
 import crte.com.radio.util.XcmpDataUtil;
 
 public class RadioStatusUtil {
@@ -9,6 +14,10 @@ public class RadioStatusUtil {
         }
         switch (data[3]) {
             case XcmpDataUtil.BASE_INFO_RSSI:
+                int value = DataConvert.byteToInt(data, 4, 2);
+                StatusMessageEvent messageEvent = new StatusMessageEvent(StatusMessageCode.RSSI, "");
+                messageEvent.setObj(value);
+                EventBus.getDefault().post(messageEvent);
                 break;
             case XcmpDataUtil.BASE_INFO_MODEL_NUMBER:
                 break;
@@ -17,6 +26,14 @@ public class RadioStatusUtil {
             case XcmpDataUtil.BASE_INFO_SIGNALING:
                 break;
             case XcmpDataUtil.BASE_INFO_RADIO_ID:
+                int radioId = DataConvert.byteToInt(data,4,4);
+                break;
+            case XcmpDataUtil.BASE_INFO_BLUETOOTH:
+                if (data[5] == 0x00) {//bluetooth Disable
+
+                } else if (data[5] == 0x01) {//bluetooth Enable
+
+                }
                 break;
         }
     }
