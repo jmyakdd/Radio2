@@ -32,7 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun onReceiveStatusMessage(msgEvent: StatusMessageEvent) {
         when (msgEvent.code) {
             StatusMessageCode.RSSI -> {
-
+                setRssiLevel(msgEvent.obj as Int)
             }
             StatusMessageCode.POWER_STATUS -> {
 
@@ -98,6 +98,10 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     fun setBatteryLevel(level: Int) {
         iv_battery.drawable.setLevel(10000 * level / 100)
+    }
+
+    fun setPowerLevel(level: Int){
+
     }
 
     /**

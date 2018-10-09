@@ -19,11 +19,28 @@ public class RadioService extends Service{
 
     private ReceiveThread receiveThread;
 
+    private boolean isStart = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
         receiveThread = new ReceiveThread();
         new Thread(receiveThread).start();
+
+        isStart = true;
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (isStart) {
+                    App.Companion.getSendDataUtil().sendData(XcmpDataUtil.baseInfo(XcmpDataUtil.BASE_INFO_RSSI));
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();*/
     }
 
     @Override
@@ -39,6 +56,7 @@ public class RadioService extends Service{
     @Override
     public void onDestroy() {
         receiveThread.setStart(false);
+        isStart = false;
         super.onDestroy();
     }
 }

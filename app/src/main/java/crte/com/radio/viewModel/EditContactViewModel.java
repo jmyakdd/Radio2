@@ -13,6 +13,7 @@ public class EditContactViewModel {
 
     public final ObservableField<String> id = new ObservableField();
     public final ObservableField<String> name = new ObservableField();
+    public final ObservableField<String> num = new ObservableField();
 
     public EditContactViewModel(Context context, ViewCallBack callBack) {
         this.context = context;
@@ -21,14 +22,18 @@ public class EditContactViewModel {
 
     public void save() {
         if (id.get() == null || id.get().equals("")) {
-            ToastUtil.showShort("id不能为空");
+            ToastUtil.showShort("信道id不能为空");
             return;
         }
         if (name.get() == null || name.get().equals("")) {
-            ToastUtil.showShort("昵称不能为空");
+            ToastUtil.showShort("名称不能为空");
             return;
         }
-        Contact user = new Contact(Long.parseLong(id.get()), name.get());
+        if (num.get() == null || num.get().equals("")) {
+            ToastUtil.showShort("信道号不能为空");
+            return;
+        }
+        Contact user = new Contact(Long.parseLong(id.get()), name.get(), num.get());
         long result = ContactDbModel.insert(user);
         if (result == 0) {
             callBack.saveFail();
@@ -40,6 +45,7 @@ public class EditContactViewModel {
     public void clear() {
         id.set("");
         name.set("");
+        num.set("");
     }
 
     public interface ViewCallBack {

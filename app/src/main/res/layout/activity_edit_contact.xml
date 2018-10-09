@@ -20,7 +20,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入用户number"
+            android:hint="请输入信道id"
             android:inputType="numberSigned"
             android:padding="10dp"
             android:text="@={viewModel.id}"
@@ -29,7 +29,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入用户昵称"
+            android:hint="请输入信道号"
+            android:padding="10dp"
+            android:text="@={viewModel.num}"
+            android:textSize="14sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入信道名称"
             android:padding="10dp"
             android:text="@={viewModel.name}"
             android:textSize="14sp" />

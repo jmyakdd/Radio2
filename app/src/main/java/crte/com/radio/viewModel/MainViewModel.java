@@ -52,7 +52,7 @@ public class MainViewModel implements NormalMessageDataDealInf {
                 int id = (int) msg.getData();
                 Contact contact = ContactDbModel.selectUserById(id);
                 single.set("ch1");
-                contactName.set(contact.getName());
+                contactName.set(contact.getSignalName());
                 break;
         }
     }

@@ -47,7 +47,7 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewMod
             }
 
             override fun onItemClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int) {
-                ToastUtil.showShort(viewModel.datas.get()!!.get(position).name)
+                ToastUtil.showShort(viewModel.datas.get()!!.get(position).signalName)
             }
         })
     }

@@ -32,7 +32,7 @@ public class ContactDbModel {
     }
 
     public static List<Contact> selectUserList(String name) {
-        return dao.queryBuilder().where(ContactDao.Properties.Name.eq(name))
+        return dao.queryBuilder().where(ContactDao.Properties.SignalName.eq(name))
                 .list();
     }
 

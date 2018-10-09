@@ -2,21 +2,32 @@ package crte.com.radio.entry;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Generated;
 
 @Entity(generateConstructors = false)
 public class Contact {
     @Id
     private Long id;
-    private String name;
+    private String signalNum;
+    private String signalName;
 
-    public Contact(String name) {
-        this.name = name;
+    public Contact(String signalName) {
+        this.signalName = signalName;
     }
 
-    public Contact(Long id, String name) {
+    public Contact(String signalNum, String signalName) {
+        this.signalNum = signalNum;
+        this.signalName = signalName;
+    }
+
+    public Contact(Long id, String signalName) {
         this.id = id;
-        this.name = name;
+        this.signalName = signalName;
+    }
+
+    public Contact(Long id, String signalName, String signalNum) {
+        this.id = id;
+        this.signalName = signalName;
+        this.signalNum = signalNum;
     }
 
     public Contact() {
@@ -30,11 +41,19 @@ public class Contact {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSignalNum() {
+        return signalNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSignalNum(String signalNum) {
+        this.signalNum = signalNum;
+    }
+
+    public String getSignalName() {
+        return signalName;
+    }
+
+    public void setSignalName(String signalName) {
+        this.signalName = signalName;
     }
 }
