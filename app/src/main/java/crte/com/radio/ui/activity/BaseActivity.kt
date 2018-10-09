@@ -151,6 +151,10 @@ abstract class BaseActivity : AppCompatActivity() {
         startActivity(Intent(this, clazz))
     }
 
+    fun jump(clazz: Class<*>, bundle: Bundle) {
+        startActivity(Intent(this, clazz).putExtra("bundle", bundle))
+    }
+
     fun log(msg: String) {
         Log.e("test", msg)
     }

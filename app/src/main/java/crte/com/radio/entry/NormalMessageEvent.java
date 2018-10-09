@@ -1,5 +1,8 @@
 package crte.com.radio.entry;
 
+/**
+ * 负责普通xcmp消息通知
+ */
 public class NormalMessageEvent {
     public static final int CALL_START = 1;
     public static final int CALL_END = 2;

@@ -1,5 +1,8 @@
 package crte.com.radio.entry
 
+/**
+ * 状态栏状态通知信息
+ */
 class StatusMessageEvent(i: Int, s: String) {
     var code:Int = -1
     set(value) {

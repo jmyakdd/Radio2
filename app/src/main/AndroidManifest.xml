@@ -36,6 +36,7 @@
         </activity>
 
         <activity android:name=".ui.activity.EditContactActivity" />
+        <activity android:name=".ui.activity.WorkActivity" />
         <activity android:name=".ui.activity.WorkListActivity" />
         <activity android:name=".ui.activity.FunctionActivity" />
         <activity android:name=".ui.activity.MessageActivity" />

@@ -45,13 +45,22 @@ class WorkListActivity : BaseTitleActivity(), WorkListViewModel.ViewCallBack, Mu
         binding = DataBindingUtil.setContentView(this, R.layout.activity_work_list)
         viewModel = WorkListViewModel(this, this)
         binding.viewModel = viewModel
-        setTitle("工单列表")
+
+        var bundle = intent.getBundleExtra("bundle")
+        var titleStr: String
+        if (bundle.getString("type").equals("new")) {
+            titleStr = "新的工单"
+        } else {
+            titleStr = "结束工单"
+        }
+        setTitle(titleStr)
         setBack()
-        setRight("添加",object :View.OnClickListener{
+        setRight("添加", object : View.OnClickListener {
             override fun onClick(v: View?) {
                 viewModel.insert()
             }
         })
+
         var adapter = WorkAdapter(this, viewModel.data.get()!!)
         adapter.setOnItemClickListener(this)
         binding.myRv.setAdapter(adapter)

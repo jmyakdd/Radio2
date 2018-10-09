@@ -1,6 +1,9 @@
 package crte.com.radio.service;
 
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import crte.com.radio.util.DataConvert;
 import crte.com.radio.xcmpapi.CallStatusUtil;
 import crte.com.radio.xcmpapi.ChannelChangeUtil;
@@ -15,6 +18,8 @@ import crte.com.radio.xcmpapi.WorkUtil;
 public class ReceiveThread implements Runnable {
 
     private boolean isStart = false;
+    private InputStream inputStream;//获取串口的输入流
+    private OutputStream outputStream;//获取串口的输出流
 
     public ReceiveThread() {
         isStart = true;
@@ -58,6 +63,7 @@ public class ReceiveThread implements Runnable {
     private final static int RECEIVE_BROADCAST_CHANNEL_CHANGE = 0xB40D;//信道切换
     private final static int RECEIVE_BROADCAST_TONE = 0xB409;//播放Tone音
     private final static int RECEIVE_BROADCAST_VOLUME = 0xB406;//音量控制
+    private final static int RECEIVE_BROADCAST_TRANSIMIT_POWER_LEVEL = 0xB408;//发射功率改变功率
 
     /**
      * 工单code
@@ -69,6 +75,7 @@ public class ReceiveThread implements Runnable {
      */
     private final static int RECEIVE_REPLY_RADIO_STATUS = 0x800E;
     private final static int RECEIVE_REPLY_GPS_STATUS = 0x840B;//GPS status
+    private final static int RECEIVE_REPLY_TRANSIMIT_POWER_LEVEL = 0x8408;//设置发射功率
 
     /**
      * 数据解析入口
@@ -100,11 +107,19 @@ public class ReceiveThread implements Runnable {
             case RECEIVE_BROADCAST_VOLUME:
                 VolumeChangeUtil.receiveVolumeChangeData(data);
                 break;
+            case RECEIVE_BROADCAST_TRANSIMIT_POWER_LEVEL:
+
+                break;
+
+
             case RECEIVE_REPLY_RADIO_STATUS:
                 RadioStatusUtil.receiveRadioStatus(data);
                 break;
             case RECEIVE_REPLY_GPS_STATUS:
                 GpsStatusUtil.receiveGpsStatusData(data);
+                break;
+            case RECEIVE_REPLY_TRANSIMIT_POWER_LEVEL:
+
                 break;
         }
     }

@@ -10,6 +10,7 @@ import crte.com.greendao.DaoSession
 import crte.com.greendao.MyOpenHelper
 import crte.com.radio.receiver.NetWorkStatusReceive
 import crte.com.radio.util.MyLogUtil
+import crte.com.radio.util.SendDataUtil
 
 class App : Application() {
     var netReceive = NetWorkStatusReceive()
@@ -25,6 +26,7 @@ class App : Application() {
         var isCalling = false
         var isReceiving = false
         lateinit var instance: App
+        var sendDataUtil:SendDataUtil = SendDataUtil()
     }
 
     override fun onCreate() {
