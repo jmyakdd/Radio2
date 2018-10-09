@@ -120,17 +120,19 @@ public class XcmpDataUtil {
      * 040d
      *
      * @param function 进行的操作
+     * @param zone     区域
+     * @param channel  信道
      * @return
      */
-    public static byte[] sendChannelZoneSelection(byte function) {
+    public static byte[] sendChannelZoneSelection(byte function, int zone, int channel) {
         byte[] data = new byte[7];
         data[0] = 0x04;
         data[1] = 0x0d;
         data[2] = function;
-        data[3] = 0x00;
-        data[4] = 0x00;
-        data[5] = 0x00;
-        data[6] = 0x00;
+        data[3] = DataConvert.intTo2byte(zone)[0];
+        data[4] = DataConvert.intTo2byte(zone)[1];
+        data[5] = DataConvert.intTo2byte(channel)[0];
+        data[6] = DataConvert.intTo2byte(channel)[1];
         return data;
     }
 }
