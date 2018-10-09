@@ -46,6 +46,10 @@ class MainActivity : BaseActivity(), MainViewModel.ViewCallBack {
             jump(WorkActivity::class.java)
         }
 
+        initPermission()
+    }
+
+    private fun initPermission() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(applicationContext)) {
                 //启动Activity让用户授权

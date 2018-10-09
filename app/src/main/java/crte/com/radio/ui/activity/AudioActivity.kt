@@ -9,7 +9,7 @@ import crte.com.radio.adapter.AudioAdapter
 import crte.com.radio.databinding.ActivityAudioBinding
 import crte.com.radio.viewModel.AudioViewModel
 
-class AudioActivity : BaseTitleActivity(), RefreshLoadListener ,AudioViewModel.ViewCallBack{
+class AudioActivity : BaseTitleActivity(), RefreshLoadListener, AudioViewModel.ViewCallBack {
     override fun completeRefresh() {
 
     }
@@ -26,11 +26,15 @@ class AudioActivity : BaseTitleActivity(), RefreshLoadListener ,AudioViewModel.V
     }
 
     lateinit var binding: ActivityAudioBinding
-    lateinit var viewModel:AudioViewModel
+    lateinit var viewModel: AudioViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_audio)
-        viewModel = AudioViewModel(this,this)
+        viewModel = AudioViewModel(this, this)
+
+        setBack()
+        setTitle("录音回放")
+
         var adapter = AudioAdapter(this, viewModel.data.get()!!)
         binding.myRecyclerview.setLoadListener(this)
         binding.myRecyclerview.setAdapter(adapter)

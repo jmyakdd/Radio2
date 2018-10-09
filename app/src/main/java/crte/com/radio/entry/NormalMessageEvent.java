@@ -6,6 +6,7 @@ package crte.com.radio.entry;
 public class NormalMessageEvent {
     public static final int CALL_START = 1;
     public static final int CALL_END = 2;
+    public static final int CHANGE_CHANNEL = 3;
 
     private int code = -1;
     private String message;

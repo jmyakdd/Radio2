@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 import crte.com.radio.util.DataConvert;
 import crte.com.radio.xcmpapi.CallStatusUtil;
-import crte.com.radio.xcmpapi.ChannelChangeUtil;
+import crte.com.radio.xcmpapi.ChannelUtil;
 import crte.com.radio.xcmpapi.GpsStatusUtil;
 import crte.com.radio.xcmpapi.PUIDataApi;
 import crte.com.radio.xcmpapi.RadioStatusUtil;
@@ -76,6 +76,7 @@ public class ReceiveThread implements Runnable {
     private final static int RECEIVE_REPLY_RADIO_STATUS = 0x800E;
     private final static int RECEIVE_REPLY_GPS_STATUS = 0x840B;//GPS status
     private final static int RECEIVE_REPLY_TRANSIMIT_POWER_LEVEL = 0x8408;//设置发射功率
+    private final static int RECEIVE_REPLY_REQUEST_CHANNEL_INFO = 0x840D;//请求信道信息
 
     /**
      * 数据解析入口
@@ -96,7 +97,7 @@ public class ReceiveThread implements Runnable {
                 TransimitControlUtil.receiveTransmitControl(data);
                 break;
             case RECEIVE_BROADCAST_CHANNEL_CHANGE:
-                ChannelChangeUtil.receiveChannelChangeData(data);
+                ChannelUtil.receiveChannelChangeData(data);
                 break;
             case RECEIVE_BROADCAST_WORK:
                 WorkUtil.receiveWorkMsg(data);
@@ -120,6 +121,9 @@ public class ReceiveThread implements Runnable {
                 break;
             case RECEIVE_REPLY_TRANSIMIT_POWER_LEVEL:
 
+                break;
+            case RECEIVE_REPLY_REQUEST_CHANNEL_INFO:
+                ChannelUtil.receiveChannelInfoData(data);
                 break;
         }
     }

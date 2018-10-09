@@ -108,4 +108,29 @@ public class XcmpDataUtil {
         data[3] = level;
         return data;
     }
+
+    public static final byte SET_ZONE_AND_CHANNEL = 0x05;
+    public static final byte SET_CHANNEL = 0x06;
+    public static final byte SET_ZONE = 0x07;
+    public static final byte QUERY_ZONE_AND_CHANNEL = (byte) 0x80;
+    public static final byte QUERY_NUMBER_OF_ZONES = (byte) 0x81;
+    public static final byte QUERY_NUMBER_OF_CHANNELS_IN_A_ZONE = (byte) 0x82;
+
+    /**
+     * 040d
+     *
+     * @param function 进行的操作
+     * @return
+     */
+    public static byte[] sendChannelZoneSelection(byte function) {
+        byte[] data = new byte[7];
+        data[0] = 0x04;
+        data[1] = 0x0d;
+        data[2] = function;
+        data[3] = 0x00;
+        data[4] = 0x00;
+        data[5] = 0x00;
+        data[6] = 0x00;
+        return data;
+    }
 }

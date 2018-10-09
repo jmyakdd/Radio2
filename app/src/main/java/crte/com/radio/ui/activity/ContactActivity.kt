@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -37,6 +38,8 @@ class ContactActivity : BaseTitleActivity(), RefreshLoadListener, ContactViewMod
         binding.myRecyclerview.setAdapter(adapter)
         binding.myRecyclerview.setLayoutManager(LinearLayoutManager(this))
         binding.myRecyclerview.setLoadListener(this)
+        var divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        binding.myRecyclerview.setDivider(divider)
 
         adapter.setOnItemClickListener(object : MultiItemTypeAdapter.OnItemClickListener {
             override fun onItemLongClick(view: View?, holder: RecyclerView.ViewHolder?, position: Int): Boolean {

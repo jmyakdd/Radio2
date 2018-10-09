@@ -3,6 +3,8 @@ package crte.com.radio.viewModel;
 import android.content.Context;
 import android.databinding.ObservableField;
 
+import crte.com.radio.dao.ContactDbModel;
+import crte.com.radio.entry.Contact;
 import crte.com.radio.entry.NormalMessageEvent;
 
 public class MainViewModel implements NormalMessageDataDealInf {
@@ -15,9 +17,15 @@ public class MainViewModel implements NormalMessageDataDealInf {
     public MainViewModel(Context context, ViewCallBack callBack) {
         this.context = context;
         this.callBack = callBack;
+
+        //初始化请求
+        init();
         single.set("ch2");
         contactName.set("通话组123");
-        single.get();
+    }
+
+    private void init() {
+
     }
 
     @Override
@@ -39,6 +47,12 @@ public class MainViewModel implements NormalMessageDataDealInf {
                         callStatus.set("");
                     }
                 }).start();
+                break;
+            case NormalMessageEvent.CHANGE_CHANNEL:
+                int id = (int) msg.getData();
+                Contact contact = ContactDbModel.selectUserById(id);
+                single.set("ch1");
+                contactName.set(contact.getName());
                 break;
         }
     }

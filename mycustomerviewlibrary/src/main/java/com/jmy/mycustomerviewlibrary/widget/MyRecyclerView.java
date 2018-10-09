@@ -135,6 +135,10 @@ public class MyRecyclerView extends LinearLayout implements SwipeRefreshLayout.O
         refreshList.setAdapter(meRefreshListAdapter);
     }
 
+    public void setDivider(RecyclerView.ItemDecoration divider){
+        refreshList.addItemDecoration(divider);
+    }
+
     public void notifyDataSetChanged() {
         meRefreshListAdapter.notifyDataSetChanged();
     }
