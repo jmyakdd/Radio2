@@ -8,6 +8,7 @@ import android.os.Environment
 import crte.com.greendao.DaoMaster
 import crte.com.greendao.DaoSession
 import crte.com.greendao.MyOpenHelper
+import crte.com.radio.entry.Zone
 import crte.com.radio.receiver.NetWorkStatusReceive
 import crte.com.radio.util.MyLogUtil
 import crte.com.radio.util.SendDataUtil
@@ -26,7 +27,8 @@ class App : Application() {
         var isCalling = false
         var isReceiving = false
         lateinit var instance: App
-        var sendDataUtil:SendDataUtil = SendDataUtil()
+        var sendDataUtil: SendDataUtil = SendDataUtil()
+        var zone: Zone? = null
     }
 
     override fun onCreate() {

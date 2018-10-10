@@ -5,7 +5,7 @@ import android.databinding.ObservableField;
 
 import crte.com.radio.dao.ContactDbModel;
 import crte.com.radio.entry.Contact;
-import crte.com.radio.entry.NormalMessageEvent;
+import crte.com.radio.message.NormalMessageEvent;
 
 public class MainViewModel implements NormalMessageDataDealInf {
     private Context context;

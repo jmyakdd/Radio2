@@ -1,4 +1,4 @@
-package crte.com.radio.entry;
+package crte.com.radio.message;
 
 /**
  * 负责普通xcmp消息通知

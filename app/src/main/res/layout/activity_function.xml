@@ -18,33 +18,42 @@
         <include layout="@layout/title_bar" />
 
         <TextView
-            android:id="@+id/record"
+            android:id="@+id/zone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="10dp"
+            android:padding="20dp"
+            android:text="区域"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:padding="20dp"
             android:text="录音回放"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/video"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
-            android:padding="10dp"
+            android:padding="20dp"
             android:text="录像"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
             android:background="@color/white"
-            android:padding="10dp"
+            android:padding="20dp"
             android:text="关于"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textColor="#000000" />
     </LinearLayout>
 </layout>

@@ -33,7 +33,10 @@ public class EditContactViewModel {
             ToastUtil.showShort("信道号不能为空");
             return;
         }
-        Contact user = new Contact(Long.parseLong(id.get()), name.get(), num.get());
+        Contact user = new Contact();
+        user.setId(Long.parseLong(id.get()));
+        user.setSignalName(name.get());
+        user.setSignalNum(num.get());
         long result = ContactDbModel.insert(user);
         if (result == 0) {
             callBack.saveFail();

@@ -2,8 +2,8 @@ package crte.com.radio.xcmpapi;
 
 import org.greenrobot.eventbus.EventBus;
 
-import crte.com.radio.entry.StatusMessageCode;
-import crte.com.radio.entry.StatusMessageEvent;
+import crte.com.radio.message.StatusMessageCode;
+import crte.com.radio.message.StatusMessageEvent;
 import crte.com.radio.util.DataConvert;
 import crte.com.radio.util.XcmpDataUtil;
 

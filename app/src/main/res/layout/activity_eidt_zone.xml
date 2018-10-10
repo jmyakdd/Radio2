@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="crte.com.radio.viewModel.EditZoneViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/status_bar" />
+
+        <include layout="@layout/title_bar" />
+
+        <EditText
+            android:id="@+id/num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入区域id"
+            android:inputType="numberSigned"
+            android:padding="10dp"
+            android:text="@={viewModel.num}"
+            android:visibility="@{viewModel.isEdit?View.VISIBLE : View.GONE}"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入区域名"
+            android:padding="10dp"
+            android:text="@={viewModel.name}"
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.save()}"
+            android:text="保存" />
+    </LinearLayout>
+
+</layout>

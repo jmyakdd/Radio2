@@ -4,7 +4,7 @@ import android.content.Context
 import android.databinding.ObservableField
 import crte.com.radio.dao.ContactDbModel
 import crte.com.radio.entry.Contact
-import crte.com.radio.entry.NormalMessageEvent
+import crte.com.radio.message.NormalMessageEvent
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.ObservableOnSubscribe

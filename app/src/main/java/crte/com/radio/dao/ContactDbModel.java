@@ -10,7 +10,8 @@ public class ContactDbModel {
     private static ContactDao dao = App.instance.getDaoSession().getContactDao();
 
     public static long insert(String name) {
-        Contact testUser = new Contact(name);
+        Contact testUser = new Contact();
+        testUser.setSignalName(name);
         return dao.insert(testUser);
     }
 

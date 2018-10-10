@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
-import crte.com.radio.entry.NetStateMessageEvent
+import crte.com.radio.message.NetStateMessageEvent
 import crte.com.radio.util.NetUtil
 import org.greenrobot.eventbus.EventBus
 

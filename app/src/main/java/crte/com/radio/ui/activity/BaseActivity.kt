@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import crte.com.radio.api.ApiService
 import crte.com.radio.api.ApiServiceHelper
-import crte.com.radio.entry.NetStateMessageEvent
-import crte.com.radio.entry.StatusMessageCode
-import crte.com.radio.entry.StatusMessageEvent
+import crte.com.radio.message.NetStateMessageEvent
+import crte.com.radio.message.StatusMessageCode
+import crte.com.radio.message.StatusMessageEvent
 import crte.com.radio.util.NetUtil
 import crte.com.radio.util.ToastUtil
 import kotlinx.android.synthetic.main.status_bar.*

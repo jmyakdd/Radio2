@@ -27,24 +27,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTop">
 
         </activity>
-        <activity android:name="crte.com.radio.ui.activity.ContactActivity"></activity>
+        <activity
+            android:name="crte.com.radio.ui.activity.ContactActivity"
+            android:launchMode="singleTop" />
         <activity android:name="crte.com.radio.ui.activity.LoginActivity">
 
         </activity>
 
-        <activity android:name=".ui.activity.EditContactActivity" />
-        <activity android:name=".ui.activity.WorkActivity" />
-        <activity android:name=".ui.activity.WorkListActivity" />
-        <activity android:name=".ui.activity.FunctionActivity" />
-        <activity android:name=".ui.activity.MessageActivity" />
-        <activity android:name=".ui.activity.MessageDetailActivity" />
-        <activity android:name=".ui.activity.ReplyMessageActivity" />
-        <activity android:name=".ui.activity.AboutActivity" />
-        <activity android:name=".ui.activity.VideoActivity" />
-        <activity android:name=".ui.activity.AudioActivity" />
+        <activity
+            android:name=".ui.activity.EditContactActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.WorkActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.WorkListActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.FunctionActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.MessageActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.MessageDetailActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.ReplyMessageActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.VideoActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.AudioActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.ZoneActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activity.EditZoneActivity"
+            android:launchMode="singleTop" />
 
         <service android:name=".service.RadioService" />
 

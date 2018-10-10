@@ -10,7 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import crte.com.radio.R
 import crte.com.radio.databinding.ActivityMainBinding
-import crte.com.radio.entry.NormalMessageEvent
+import crte.com.radio.message.NormalMessageEvent
 import crte.com.radio.service.RadioService
 import crte.com.radio.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*

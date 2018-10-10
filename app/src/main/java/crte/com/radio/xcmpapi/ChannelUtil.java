@@ -2,7 +2,7 @@ package crte.com.radio.xcmpapi;
 
 import org.greenrobot.eventbus.EventBus;
 
-import crte.com.radio.entry.NormalMessageEvent;
+import crte.com.radio.message.NormalMessageEvent;
 import crte.com.radio.util.DataConvert;
 
 public class ChannelUtil {

@@ -20,5 +20,6 @@ class FunctionActivity : BaseTitleActivity(), FunctionViewModel.ViewCallBack {
         binding.about.setOnClickListener { jump(AboutActivity::class.java) }
         binding.record.setOnClickListener { jump(AudioActivity::class.java) }
         binding.video.setOnClickListener { jump(VideoActivity::class.java) }
+        binding.zone.setOnClickListener { jump(ZoneActivity::class.java) }
     }
 }

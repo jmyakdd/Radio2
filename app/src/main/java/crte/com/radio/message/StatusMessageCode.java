@@ -1,4 +1,4 @@
-package crte.com.radio.entry;
+package crte.com.radio.message;
 
 public class StatusMessageCode {
     public static final int RSSI = 0;

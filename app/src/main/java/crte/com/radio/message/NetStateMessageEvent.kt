@@ -1,4 +1,4 @@
-package crte.com.radio.entry
+package crte.com.radio.message
 
 import crte.com.radio.util.NetUtil
 

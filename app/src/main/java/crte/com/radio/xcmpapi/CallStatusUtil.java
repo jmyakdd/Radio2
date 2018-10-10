@@ -52,7 +52,11 @@ public class CallStatusUtil {
         switch (data[3]) {
             case State_Call_Ended://语音结束
                 break;
-            case State_Call_Initiated://语音开始
+            case State_Call_Initiated://语音请求
+                break;
+            case State_Call_In_Progress://语音发起中
+                break;
+            case State_Call_In_Hangtime://语音挂起（松开ptt）
                 break;
         }
     }

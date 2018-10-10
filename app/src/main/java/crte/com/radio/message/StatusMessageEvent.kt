@@ -1,4 +1,4 @@
-package crte.com.radio.entry
+package crte.com.radio.message
 
 /**
  * 状态栏状态通知信息
